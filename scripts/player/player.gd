@@ -1,4 +1,12 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
+
+var movement = PlayerMovement.new($".")
+
+func _process(_delta: float) -> void:
+    movement.process()
+
+func _physics_process(delta: float) -> void:
+    movement.physics_process(delta)
 
 class InputAction:
     enum InputActionType {
@@ -63,95 +71,102 @@ class InputAction:
         
         output[0] = Vector2(x, y)
 
-@export var jump_force := 40.0
-@export var held_down_gravity_multi := 1.5
-@export var terminal_fall_velocity := 400.0
-@export var held_down_fall_velocity_multi := 1.5
-@export var jump_release_multi := 0.35
-@export var coyote_time := 0.175
-@export var jump_buffer_time := 0.2
+class PlayerMovement:
+    var jump_force := 250
+    var held_down_gravity_multi := 1.5
+    var terminal_fall_velocity := 400.0
+    var held_down_fall_velocity_multi := 1.5
+    var jump_release_multi := 0.35
+    var coyote_time := 0.175
+    var jump_buffer_time := 0.2
 
-@export var max_speed := 100.0
-@export var acceleration_force := 500.0
-@export var decceleration_force := 500.0
-@export var air_control_multi := 0.7
-@export var air_friction_multi := 0.1
-@export var turnaround_multi := 2
+    var max_speed := 100.0
+    var acceleration_force := 500.0
+    var decceleration_force := 500.0
+    var air_control_multi := 0.7
+    var air_friction_multi := 0.1
+    var turnaround_multi := 2
+    var body: CharacterBody2D
 
-var movement_input = InputAction.new(["move_left", "move_right", "move_up", "move_down"])
-var jump_input = InputAction.new("jump")
+    var movement_input = InputAction.new(["move_left", "move_right", "move_up", "move_down"])
+    var jump_input = InputAction.new("jump")
 
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+    var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-var coyote_timer := 0.0
-var jump_buffer := 0.0
-var can_release_jump := false
+    var coyote_timer := 0.0
+    var jump_buffer := 0.0
+    var can_release_jump := false
 
-func _process(_delta: float):
-    movement_input.update()
-    jump_input.update()
+    func _init(character_body: CharacterBody2D):
+        body = character_body
 
-func _physics_process(delta: float):
-    handle_gravity(delta)
-    handle_walking(delta)
-    handle_jumping(delta)
-    move_and_slide()
+    func process():
+        movement_input.update()
+        jump_input.update()
 
-func handle_gravity(delta: float):
-    if is_on_floor(): return
-    var gravity_force = gravity * delta
-    var terminal_velocity = terminal_fall_velocity
-    if movement_input.output[1].y > 0.0:
-        gravity_force *= held_down_gravity_multi
-        terminal_velocity *= held_down_fall_velocity_multi
+    func physics_process(delta: float):
+        handle_gravity(delta)
+        handle_walking(delta)
+        handle_jumping(delta)
+        body.move_and_slide()
 
-    velocity.y += gravity_force
-    if velocity.y > terminal_velocity:
-        velocity.y = terminal_velocity
+    func handle_gravity(delta: float):
+        if body.is_on_floor(): return
 
-func handle_walking(delta: float):
-    var direction = movement_input.output[0].x
+        var gravity_force = gravity * delta
+        var terminal_velocity = terminal_fall_velocity
+        if movement_input.output[1].y > 0.0:
+            gravity_force *= held_down_gravity_multi
+            terminal_velocity *= held_down_fall_velocity_multi
 
-    if abs(direction) > 0:
-        accelerate(delta, direction)
-        return
-    deccelerate(delta)
+        body.velocity.y += gravity_force
+        if body.velocity.y > terminal_velocity:
+            body.velocity.y = terminal_velocity
 
-func accelerate(delta: float, direction: float):
-    var accel = acceleration_force * delta
-    if not is_on_floor():
-        accel *= air_control_multi
+    func handle_walking(delta: float):
+        var direction = movement_input.output[0].x
 
-    if sign(direction) != sign(velocity.x):
-        accel *= turnaround_multi
+        if abs(direction) > 0:
+            accelerate(delta, direction)
+            return
 
-    velocity.x = move_toward(velocity.x, max_speed * direction, accel) 
+        deccelerate(delta)
 
-func deccelerate(delta: float):
-    var deccel = decceleration_force * delta
-    if not is_on_floor():
-        deccel *= air_friction_multi
+    func accelerate(delta: float, direction: float):
+        var accel = acceleration_force * delta
+        if not body.is_on_floor():
+            accel *= air_control_multi
 
-    velocity.x = move_toward(velocity.x, 0, deccel)
+        if sign(direction) != sign(body.velocity.x):
+            accel *= turnaround_multi
 
-func handle_jumping(delta: float):
-    jump_timers(delta)
-    if can_release_jump && !jump_input.output[0]:
-        velocity.y *= jump_release_multi
+        body.velocity.x = move_toward(body.velocity.x, max_speed * direction, accel) 
 
-    if coyote_timer < coyote_time && jump_buffer < jump_buffer_time:
-        coyote_timer = coyote_time
-        jump_buffer = jump_buffer_time
-        velocity.y -= jump_force
-        can_release_jump = true
+    func deccelerate(delta: float):
+        var deccel = decceleration_force * delta
+        if not body.is_on_floor():
+            deccel *= air_friction_multi
 
-func jump_timers(delta: float):
-    jump_buffer += delta
-    coyote_timer += delta
-    if jump_input.output[1]:
-        jump_buffer = 0.0
+        body.velocity.x = move_toward(body.velocity.x, 0, deccel)
 
-    if is_on_floor():
-        coyote_timer = 0.0
+    func handle_jumping(delta: float):
+        jump_timers(delta)
+        if can_release_jump && !jump_input.output[0]:
+            body.velocity.y *= jump_release_multi
 
-    if velocity.y > 0.0: can_release_jump = false
+        if coyote_timer < coyote_time && jump_buffer < jump_buffer_time:
+            coyote_timer = coyote_time
+            jump_buffer = jump_buffer_time
+            body.velocity.y -= jump_force
+            can_release_jump = true
+
+    func jump_timers(delta: float):
+        jump_buffer += delta
+        coyote_timer += delta
+        if jump_input.output[1]:
+            jump_buffer = 0.0
+
+        if body.is_on_floor():
+            coyote_timer = 0.0
+
+        if body.velocity.y > 0.0: can_release_jump = false

@@ -10,12 +10,23 @@
 
 [node name="Polygon2D" type="Polygon2D" parent="Environment/Ground"]
 position = Vector2(160, 136)
-color = Color(0, 0, 0.54, 1)
+color = Color(0.333333, 0, 0.0901961, 1)
 polygon = PackedVector2Array(160, 0, 160, 16, -160, 16, -160, 0)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Ground"]
 position = Vector2(160, 136)
 polygon = PackedVector2Array(160, 0, 160, 16, -160, 16, -160, 0)
+
+[node name="Wall" type="StaticBody2D" parent="Environment"]
+
+[node name="Polygon2D" type="Polygon2D" parent="Environment/Wall"]
+position = Vector2(160, 136)
+color = Color(0, 0, 0.54, 1)
+polygon = PackedVector2Array(-128, -136, -128, 0, -160, 0, -160, -136)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Wall"]
+position = Vector2(160, 136)
+polygon = PackedVector2Array(-128, -136, -128, 0, -160, 0, -160, -136)
 
 [node name="Player" parent="." instance=ExtResource("1_xo1u8")]
 position = Vector2(152, 0)
