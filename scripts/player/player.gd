@@ -76,6 +76,7 @@ class InputAction:
 @export var decceleration_force := 500.0
 @export var air_control_multi := 0.7
 @export var air_friction_multi := 0.1
+@export var turnaround_multi := 2
 
 var movement_input = InputAction.new(["move_left", "move_right", "move_up", "move_down"])
 var jump_input = InputAction.new("jump")
@@ -113,14 +114,16 @@ func handle_walking(delta: float):
 
     if abs(direction) > 0:
         accelerate(delta, direction)
-
-    if abs(direction) == 0 || sign(direction) != sign(velocity.x): 
-        deccelerate(delta)
+        return
+    deccelerate(delta)
 
 func accelerate(delta: float, direction: float):
     var accel = acceleration_force * delta
     if not is_on_floor():
         accel *= air_control_multi
+
+    if sign(direction) != sign(velocity.x):
+        accel *= turnaround_multi
 
     velocity.x = move_toward(velocity.x, max_speed * direction, accel) 
 
