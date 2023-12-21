@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxn4cc1nfeqgy"]
+
+[ext_resource type="Texture2D" uid="uid://dx4b2eo1fdjbv" path="res://imports/sprites/sword_test.png" id="1_b7ve0"]
+[ext_resource type="Script" path="res://scripts/weapons/melee.gd" id="2_bgwyc"]
+
+[node name="Sword" type="Sprite2D"]
+texture = ExtResource("1_b7ve0")
+script = ExtResource("2_bgwyc")

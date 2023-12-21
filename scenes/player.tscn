@@ -1,17 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://by85b6trln3hu"]
+[gd_scene load_steps=5 format=3 uid="uid://by85b6trln3hu"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_a725r"]
 [ext_resource type="Texture2D" uid="uid://1nlj5cybuxvr" path="res://imports/sprites/test.png" id="2_u5wcy"]
+[ext_resource type="PackedScene" uid="uid://cxn4cc1nfeqgy" path="res://scenes/sword.tscn" id="3_2tw83"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eoy61"]
 size = Vector2(6, 14)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_a725r")
+max_speed = null
+acceleration_force = null
+decceleration_force = null
+air_control_multi = null
+air_friction_multi = null
+max_speed_friction_multi = null
+turnaround_multi = null
+max_speed_acceleration_divi = null
+jump_force = null
+walljump_force = null
+jump_release_multi = null
+coyote_time = null
+jump_buffer_time = null
+held_down_gravity_multi = null
+terminal_fall_velocity = null
+held_down_fall_velocity_multi = null
 metadata/_edit_lock_ = true
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_u5wcy")
+
+[node name="Sword" parent="Sprite" instance=ExtResource("3_2tw83")]
+position = Vector2(7, -4)
+metadata/_edit_group_ = true
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
