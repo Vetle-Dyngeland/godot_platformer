@@ -1,12 +1,14 @@
 class_name PlayerInputs
-var horizontal_input = InputAction.new(["move_left", "move_right"])
-var vertical_input = InputAction.new(["move_up", "move_down"])
-var jump_input = InputAction.new("jump")
+var horizontal_input := InputAction.new(["move_left", "move_right"])
+var vertical_input := InputAction.new(["move_up", "move_down"])
+var jump_input := InputAction.new("jump")
+var attack_input := InputAction.new("attack")
 
 func update():
     horizontal_input.update()
     vertical_input.update()
     jump_input.update()
+    attack_input.update()
 
 
 class InputAction:

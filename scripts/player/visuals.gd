@@ -6,7 +6,7 @@ func _init(sprite: Sprite2D):
     _sprite = sprite
 
 func update(input: float) -> void:
-    var should_flip_sprite = input < 0 != _sprite.flip_h
+    var should_flip_sprite = input != 0 && input < 0 != _sprite.flip_h
 
     if should_flip_sprite:
         _flip_sprite(input)

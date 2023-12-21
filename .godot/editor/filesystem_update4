@@ -8,3 +8,6 @@ res://scenes/sword.tscn
 res://scripts/weapons/weapon.gd
 res://scripts/weapons/melee.gd
 res://scripts/player/visuals.gd
+res://scripts/player/player.gd
+res://scripts/player/weapons.gd
+res://scripts/player/input.gd

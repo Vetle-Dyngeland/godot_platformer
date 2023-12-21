@@ -27,6 +27,7 @@ var horizontal_movement: HorizontalMovement
 var jumper: Jumper
 var gravity: Gravity
 var visuals: PlayerVisuals
+var weapons: WeaponHolder
 
 func _ready() -> void:
     input = PlayerInputs.new();
@@ -70,10 +71,13 @@ func _ready() -> void:
         sprite,
     )
 
+    weapons = WeaponHolder.new()
+
 
 func _process(_delta: float) -> void:
     input.update()
     visuals.update(input.horizontal_input.get_input())
+    weapons.update(input.attack_input)
 
 func _physics_process(delta: float) -> void:
     horizontal_movement.update(delta, input.horizontal_input.get_input())

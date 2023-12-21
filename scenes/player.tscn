@@ -31,7 +31,9 @@ metadata/_edit_lock_ = true
 texture = ExtResource("2_u5wcy")
 
 [node name="Sword" parent="Sprite" instance=ExtResource("3_2tw83")]
-position = Vector2(7, -4)
+damage = null
+attack_rate = null
+keep_attacking_while_held = null
 metadata/_edit_group_ = true
 
 [node name="Collider" type="CollisionShape2D" parent="."]

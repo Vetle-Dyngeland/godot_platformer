@@ -1,5 +1,5 @@
 class_name MeleeWeapon extends Weapon
 
-func _process(delta: float) -> void:
+func update(input) -> void:
     print("Melee")
-    super(delta)
+    super(input)

@@ -6,15 +6,14 @@ class_name Weapon extends Node2D
 
 var attacking = false
 
-func _process(_delta: float) -> void:
-    if should_attack():
-        attack()
+func _init():
+    pass   
 
-func should_attack() -> bool:
-    if keep_attacking_while_held:
-        return Input.is_action_pressed("attack", false)
-    else: return Input.is_action_just_pressed("attack", false)
+func update(input) -> void:
+    if _should_attack(input): attack()
 
+func _should_attack(input) -> bool:
+    return (keep_attacking_while_held && input.held()) || input.just_pressed()
+    
 func attack():
     attacking = true
-    attacking = false
