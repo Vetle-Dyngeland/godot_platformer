@@ -1,10 +1,10 @@
 class_name PlayerCamera
 
-var lookahead_time := 0.2
-var lookahead_ignore_y := false
-var smoothing_amount := 5
-var smoothing_ignore_y := false
-var camera_scaling := 0.5
+var lookahead_time: float
+var lookahead_ignore_y: bool
+var smoothing_amount: int
+var smoothing_ignore_y: bool
+var camera_scaling: float
 
 var root: Node
 
@@ -32,16 +32,16 @@ func _init(
 
 func update(delta: float):
     # If the camera does not exist, create a new one
-    if !_camera:
+    if !_camera: 
         reset()
 
     update_smoothing(delta)
     move_camera(delta)
 
 func reset():
-    _set_camera()
-    _reset_mutable()
-    _set_camera_options()
+    _set_camera() # Get/create the camera
+    _reset_mutable() # Reset the smoothing and such
+    _set_camera_options() # Set the options in the camera itself, fex. the position 
 
 func _set_camera():
     # Searches each node to check if it's a camera
@@ -55,7 +55,7 @@ func _set_camera():
     root.add_child(_camera)
 
 func _set_camera_options():
-    _camera.position = player.position
+    _camera.position = player.position # Set the initial position
     _camera.zoom = Vector2.ONE * camera_scaling
 
 func _reset_mutable():
@@ -68,7 +68,10 @@ func get_all_children(node, arr := []):
     return arr
 
 func update_smoothing(delta: float):
-    _smoothing_positions.append(_get_new_position(delta))
+    # Add the current position
+    _smoothing_positions.append(_get_position_and_lookahead(delta)) 
+
+    # Remove (most often) the last position so it only averages recent positions
     while len(_smoothing_positions) > smoothing_amount:
         _smoothing_positions.remove_at(0)
 
@@ -78,16 +81,17 @@ func move_camera(delta: float):
         final_pos += position
 
     if final_pos != Vector2.ZERO:
-        final_pos /= len(_smoothing_positions)
-    else:
-        final_pos = _get_new_position(delta)
+        final_pos /= len(_smoothing_positions) # Get the average
+    else: # If the smoothing amount is 0
+        final_pos = _get_position_and_lookahead(delta)
 
     if smoothing_ignore_y:
         final_pos.y = player.position.y
 
     _camera.position = final_pos
 
-func _get_new_position(delta: float) -> Vector2:
+# Gets the position with lookahead
+func _get_position_and_lookahead(delta: float) -> Vector2:
     var new_position := player.position
     var lookahead := player.velocity * delta * lookahead_time
     if lookahead_ignore_y: 

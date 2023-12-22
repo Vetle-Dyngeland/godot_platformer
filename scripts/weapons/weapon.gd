@@ -1,5 +1,6 @@
 class_name Weapon extends Node2D
 
+# Will probably make these variables into a resource later
 @export var damage := 10.0
 @export var attack_rate := 2
 @export var keep_attacking_while_held := false
@@ -26,6 +27,7 @@ func update(input) -> void:
     # For some reason, the weapon cannot find the animation player in _init()
     if !_anim_player: _get_animation_player()
 
+    # If just stopped attacking, reset some variables
     if !_anim_player.is_playing() && attacking:
         _anim_player.speed_scale = 1
         _anim_player.play("weapons/RESET")
@@ -34,11 +36,13 @@ func update(input) -> void:
     if _should_attack(input):
         attack()
 
+
 func _should_attack(input) -> bool:
     return !attacking && ((keep_attacking_while_held && input.held()) || input.just_pressed())
 
 func attack():
     attacking = true
     _anim_player.play("weapons/sword_attack")
+    # Set the scale so it matches with the fire rate of the weapon
     _anim_player.speed_scale = _anim_player.current_animation_length / (1.0 / attack_rate)
 
