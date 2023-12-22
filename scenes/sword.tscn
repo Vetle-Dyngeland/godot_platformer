@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxn4cc1nfeqgy"]
+[gd_scene load_steps=7 format=3 uid="uid://cxn4cc1nfeqgy"]
 
 [ext_resource type="Texture2D" uid="uid://dx4b2eo1fdjbv" path="res://imports/sprites/sword_test.png" id="1_b7ve0"]
 [ext_resource type="Script" path="res://scripts/weapons/melee.gd" id="2_bgwyc"]
@@ -66,6 +66,9 @@ _data = {
 "sword_attack": SubResource("Animation_fjmy3")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5pq0p"]
+size = Vector2(4, 15)
+
 [node name="Sword" type="Sprite2D"]
 texture = ExtResource("1_b7ve0")
 script = ExtResource("2_bgwyc")
@@ -74,3 +77,9 @@ script = ExtResource("2_bgwyc")
 libraries = {
 "weapons": SubResource("AnimationLibrary_qh38j")
 }
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_5pq0p")

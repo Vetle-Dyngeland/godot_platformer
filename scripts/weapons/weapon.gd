@@ -15,7 +15,6 @@ func _init():
 
 func _get_animation_player():
     for child in get_children():
-        print(child)
         if child is AnimationPlayer:
             _anim_player = child
             return
@@ -42,5 +41,4 @@ func attack():
     attacking = true
     _anim_player.play("weapons/sword_attack")
     _anim_player.speed_scale = _anim_player.current_animation_length / (1.0 / attack_rate)
-    print("Attack")
 

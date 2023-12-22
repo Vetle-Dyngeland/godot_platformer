@@ -28,5 +28,57 @@ polygon = PackedVector2Array(-128, -136, -128, 0, -160, 0, -160, -136)
 position = Vector2(160, 136)
 polygon = PackedVector2Array(-128, -136, -128, 0, -160, 0, -160, -136)
 
+[node name="Roof2" type="StaticBody2D" parent="Environment"]
+position = Vector2(72, 0)
+rotation = 2.06442
+scale = Vector2(0.414729, 0.769093)
+skew = 0.72993
+
+[node name="Polygon2D" type="Polygon2D" parent="Environment/Roof2"]
+position = Vector2(160, 136)
+color = Color(0, 0, 0.54, 1)
+polygon = PackedVector2Array(56, -136, 56, -112, -128, -112, -128, -136)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Roof2"]
+position = Vector2(160, 136)
+polygon = PackedVector2Array(56, -136, 56, -112, -128, -112, -128, -136)
+
+[node name="Roof3" type="StaticBody2D" parent="Environment"]
+position = Vector2(240, 96)
+scale = Vector2(0.349339, 0.791657)
+
+[node name="Polygon2D" type="Polygon2D" parent="Environment/Roof3"]
+position = Vector2(160, 136)
+color = Color(0, 0, 0.54, 1)
+polygon = PackedVector2Array(56, -136, 56, -112, -128, -112, -128, -136)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Roof3"]
+position = Vector2(160, 136)
+polygon = PackedVector2Array(56, -136, 56, -112, -128, -112, -128, -136)
+
+[node name="Wall2" type="StaticBody2D" parent="Environment"]
+position = Vector2(288, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="Environment/Wall2"]
+position = Vector2(160, 136)
+color = Color(0, 0, 0.54, 1)
+polygon = PackedVector2Array(-128, -136, -128, 0, -160, 0, -160, -136)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Wall2"]
+position = Vector2(160, 136)
+polygon = PackedVector2Array(-128, -136, -128, 0, -160, 0, -160, -136)
+
+[node name="Roof" type="StaticBody2D" parent="Environment"]
+position = Vector2(0, 64)
+
+[node name="Polygon2D" type="Polygon2D" parent="Environment/Roof"]
+position = Vector2(160, 136)
+color = Color(0, 0, 0.54, 1)
+polygon = PackedVector2Array(56, -136, 56, -112, -128, -112, -128, -136)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Roof"]
+position = Vector2(160, 136)
+polygon = PackedVector2Array(56, -136, 56, -112, -128, -112, -128, -136)
+
 [node name="Player" parent="." instance=ExtResource("1_xo1u8")]
 position = Vector2(152, 0)

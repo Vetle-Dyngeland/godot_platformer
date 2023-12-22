@@ -11,8 +11,8 @@ class_name Player extends CharacterBody2D
 @export var max_speed_acceleration_divi := 1.5 # How much acceleration is divided with (along with how much over the "max" is) when over "max" speed
 
 @export_category("Jumper")
-@export var jump_force := 250.0
-@export var walljump_force := Vector2(250.0, 200.0)
+@export var jump_force := 300.0
+@export var walljump_force := Vector2(150.0, 250.0)
 @export var jump_release_multi := 0.35
 @export var coyote_time := 0.175
 @export var jump_buffer_time := 0.2
@@ -60,18 +60,16 @@ func _ready() -> void:
         held_down_fall_velocity_multi
     )
 
-    var sprite: Sprite2D = null
-    for child in get_children():
-        if child is Sprite2D:
-            sprite = child
-    if sprite == null:
-        print("You need a Sprite2D attached to the player")
-
     visuals = PlayerVisuals.new(
-        sprite,
+        get_node_of_type(Sprite2D),
     )
 
     weapons = WeaponHolder.new($"./Sprite/Weapon Holder")
+
+func get_node_of_type(type):
+    for child in get_children():
+        if typeof(child) == typeof(type):
+            return child
 
 
 func _process(_delta: float) -> void:

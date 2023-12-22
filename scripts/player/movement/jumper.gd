@@ -79,4 +79,7 @@ func jump(jump_force: Vector2):
     _can_release_jump = true
 
     # Actually jump
-    _body.velocity += jump_force 
+    _body.velocity.x += jump_force.x
+    if _body.velocity.y > jump_force.y:
+        _body.velocity.y = jump_force.y
+    else: _body.velocity.y += jump_force.y
