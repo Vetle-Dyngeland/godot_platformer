@@ -25,6 +25,7 @@ func _flip_sprite(value: bool):
         if !child is Sprite2D: continue
         child.flip_h = value
 
+# Returns all children under the given node recursivly
 func get_all_children(node, arr := []):
     arr.append(node)
     for child in node.get_children():

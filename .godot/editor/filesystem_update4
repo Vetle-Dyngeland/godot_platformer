@@ -5,3 +5,4 @@ res://assets/resources/test_tileset.tres
 res://scenes/player.tscn
 res://scenes/sword.tscn
 res://scripts/player/visuals.gd
+res://scripts/player/weapons.gd

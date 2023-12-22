@@ -23,11 +23,11 @@ class_name Player extends CharacterBody2D
 @export var held_down_fall_velocity_multi := 1.5 # How much terminal velocity increases when you hold "move_down"
 
 @export_category("Camera")
-@export var lookahead_time := 4
-@export var lookahead_ignore_y := true
-@export var smoothing_amount := 12
-@export var smoothing_ignore_y := true
-@export var camera_scaling := 0.5
+@export var lookahead_time := 4 # How far ahead should the camera look ahead of the player
+@export var lookahead_ignore_y := true # Should the lookahead ignore the y position?
+@export var smoothing_amount := 12 # How many previous positions should be averaged to calculate the new position
+@export var smoothing_ignore_y := true # Should the smoothing ignore the y?
+@export var camera_scaling := 0.5 # How zoomed should the camera be?
 
 var input: PlayerInputs
 var horizontal_movement: HorizontalMovement
@@ -37,6 +37,7 @@ var visuals: PlayerVisuals
 var weapons: WeaponHolder
 var camera: PlayerCamera
 
+# Create components
 func _ready() -> void:
     input = PlayerInputs.new();
 
