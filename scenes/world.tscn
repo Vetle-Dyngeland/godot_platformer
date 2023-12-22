@@ -7,22 +7,6 @@
 
 [node name="Player" parent="." instance=ExtResource("1_xo1u8")]
 position = Vector2(152, 0)
-max_speed = 100.0
-acceleration_force = 500.0
-decceleration_force = 500.0
-air_control_multi = 0.7
-air_friction_multi = 0.1
-max_speed_friction_multi = 0.5
-turnaround_multi = 2.0
-max_speed_acceleration_divi = 1.5
-jump_force = 300.0
-walljump_force = Vector2(150, 250)
-jump_release_multi = 0.35
-coyote_time = 0.175
-jump_buffer_time = 0.2
-held_down_gravity_multi = 1.5
-terminal_fall_velocity = 400.0
-held_down_fall_velocity_multi = 1.5
 
 [node name="Environment" type="TileMap" parent="."]
 tile_set = ExtResource("2_5sv4o")
