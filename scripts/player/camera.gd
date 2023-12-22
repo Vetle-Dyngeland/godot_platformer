@@ -7,8 +7,8 @@ var smoothing_ignore_y := false
 var camera_scaling := 0.5
 
 var root: Node
-var player: CharacterBody2D
 
+var player: CharacterBody2D
 var _camera: Camera2D = null
 
 var _smoothing_positions := []
@@ -56,8 +56,7 @@ func _set_camera():
 
 func _set_camera_options():
     _camera.position = player.position
-    _camera.scale = Vector2.ONE * camera_scaling
-    pass
+    _camera.zoom = Vector2.ONE * camera_scaling
 
 func _reset_mutable():
     _smoothing_positions = []

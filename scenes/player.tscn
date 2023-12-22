@@ -1,11 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://by85b6trln3hu"]
+[gd_scene load_steps=3 format=3 uid="uid://by85b6trln3hu"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_a725r"]
 [ext_resource type="Texture2D" uid="uid://1nlj5cybuxvr" path="res://imports/sprites/test.png" id="2_u5wcy"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ni74q"]
-radius = 4.0
-height = 14.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_a725r")
@@ -16,6 +12,6 @@ texture = ExtResource("2_u5wcy")
 
 [node name="Weapon Holder" type="Node2D" parent="Sprite"]
 
-[node name="Collider" type="CollisionShape2D" parent="."]
+[node name="Collider" type="CollisionPolygon2D" parent="."]
 position = Vector2(0, 1)
-shape = SubResource("CapsuleShape2D_ni74q")
+polygon = PackedVector2Array(-5, 15, -7, 13, -7, 7, -3, 3, -3, 0, -8, -6, -2, -14, 2, -14, 8, -6, 3, 0, 3, 3, 7, 7, 7, 13, 5, 15)

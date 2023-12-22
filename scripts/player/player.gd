@@ -1,9 +1,9 @@
 class_name Player extends CharacterBody2D
 
 @export_category("Horizontal Movement")
-@export var max_speed := 100.0 # Max x speed
-@export var acceleration_force := 500.0 # Force applied when accelerating
-@export var decceleration_force := 500.0 # Force applied when deccelerating
+@export var max_speed := 200.0 # Max x speed
+@export var acceleration_force := 1000.0 # Force applied when accelerating
+@export var decceleration_force := 1000.0 # Force applied when deccelerating
 @export var air_control_multi := 0.7 # How much acceleration is multiplied with when in the air
 @export var air_friction_multi := 0.1 # How much decceleration is multiplied with when in the air
 @export var max_speed_friction_multi := 0.5 # How much decceleration is multiplied with when above max speed and moving the same direction
@@ -11,8 +11,8 @@ class_name Player extends CharacterBody2D
 @export var max_speed_acceleration_divi := 1.5 # How much acceleration is divided with (along with how much over the "max" is) when over "max" speed
 
 @export_category("Jumper")
-@export var jump_force := 300.0
-@export var walljump_force := Vector2(150.0, 250.0)
+@export var jump_force := 350.0
+@export var walljump_force := Vector2(250.0, 350.0)
 @export var jump_release_multi := 0.35
 @export var coyote_time := 0.175
 @export var jump_buffer_time := 0.2
