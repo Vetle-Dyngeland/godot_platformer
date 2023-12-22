@@ -1,13 +1,7 @@
+res://scripts/player/weapons.gd
+res://scripts/weapons/melee.gd
+res://scripts/weapons/weapon.gd
+res://scenes/sword.tscn
 res://scenes/world.tscn
 res://scenes/player.tscn
-res://scripts/player/movement/horizontal_movement.gd
-res://scripts/player/movement/jumper.gd
-res://scripts/resources/weapon.gd
-res://scripts/weapon.gd
-res://scenes/sword.tscn
-res://scripts/weapons/weapon.gd
-res://scripts/weapons/melee.gd
-res://scripts/player/visuals.gd
 res://scripts/player/player.gd
-res://scripts/player/weapons.gd
-res://scripts/player/input.gd

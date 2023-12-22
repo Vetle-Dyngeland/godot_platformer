@@ -71,7 +71,7 @@ func _ready() -> void:
         sprite,
     )
 
-    weapons = WeaponHolder.new()
+    weapons = WeaponHolder.new($"./Sprite/Weapon Holder")
 
 
 func _process(_delta: float) -> void:

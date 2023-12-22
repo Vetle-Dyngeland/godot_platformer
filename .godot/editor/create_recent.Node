@@ -1,3 +1,5 @@
+Node2D
+Node
 AnimationPlayer
 StaticBody2D
 CollisionPolygon2D
@@ -5,4 +7,3 @@ CollisionShape2D
 Sprite2D
 CharacterBody2D
 Polygon2D
-Node2D
