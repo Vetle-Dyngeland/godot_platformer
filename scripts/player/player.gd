@@ -22,12 +22,20 @@ class_name Player extends CharacterBody2D
 @export var terminal_fall_velocity := 400.0 # Max speed you can fall
 @export var held_down_fall_velocity_multi := 1.5 # How much terminal velocity increases when you hold "move_down"
 
+@export_category("Camera")
+@export var lookahead_time := 4
+@export var lookahead_ignore_y := true
+@export var smoothing_amount := 12
+@export var smoothing_ignore_y := true
+@export var camera_scaling := 0.5
+
 var input: PlayerInputs
 var horizontal_movement: HorizontalMovement
 var jumper: Jumper
 var gravity: Gravity
 var visuals: PlayerVisuals
 var weapons: WeaponHolder
+var camera: PlayerCamera
 
 func _ready() -> void:
     input = PlayerInputs.new();
@@ -66,16 +74,27 @@ func _ready() -> void:
 
     weapons = WeaponHolder.new($"./Sprite/Weapon Holder")
 
+    camera = PlayerCamera.new(
+        get_tree().root.get_child(0),
+        $".",
+        lookahead_time,
+        lookahead_ignore_y,
+        smoothing_amount,
+        smoothing_ignore_y,
+        camera_scaling
+    )
+
 func get_node_of_type(type):
     for child in get_children():
         if typeof(child) == typeof(type):
             return child
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
     input.update()
     visuals.update(input.horizontal_input.get_input())
     weapons.update(input.attack_input)
+    camera.update(delta)
 
 func _physics_process(delta: float) -> void:
     horizontal_movement.update(delta, input.horizontal_input.get_input())

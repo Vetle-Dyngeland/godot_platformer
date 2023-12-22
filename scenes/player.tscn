@@ -8,22 +8,6 @@ size = Vector2(6, 14)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_a725r")
-max_speed = null
-acceleration_force = null
-decceleration_force = null
-air_control_multi = null
-air_friction_multi = null
-max_speed_friction_multi = null
-turnaround_multi = null
-max_speed_acceleration_divi = null
-jump_force = null
-walljump_force = null
-jump_release_multi = null
-coyote_time = null
-jump_buffer_time = null
-held_down_gravity_multi = null
-terminal_fall_velocity = null
-held_down_fall_velocity_multi = null
 metadata/_edit_lock_ = true
 
 [node name="Sprite" type="Sprite2D" parent="."]
