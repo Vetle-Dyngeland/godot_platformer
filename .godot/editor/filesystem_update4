@@ -7,3 +7,4 @@ res://scenes/player.tscn
 res://scripts/player/player.gd
 res://scripts/player/visuals.gd
 res://scripts/player/movement/jumper.gd
+res://assets/resources/test_tileset.tres
